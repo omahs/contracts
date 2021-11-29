@@ -237,7 +237,7 @@ describe("New Standard", () => {
       const overrides = {
         value: ethers.utils.parseEther("5.0")
       }
-      await draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('1'), ethers.utils.parseEther("2"), baseCurrency.address, overrides)
+      await draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('1'), ethers.utils.parseEther("1.12"), baseCurrency.address, overrides)
       const blockNum = await ethers.provider.getBlockNumber();
       const block= await ethers.provider.getBlock(blockNum);
     });
@@ -283,9 +283,9 @@ describe("New Standard", () => {
       const overrides = {
         value: ethers.utils.parseEther("5.0")
       }
-      await expect(draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('4'), ethers.utils.parseEther("1"), baseCurrency.address, overrides))
+      await expect(draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('4'), ethers.utils.parseEther("1.1"), baseCurrency.address, overrides))
         .to.revertedWith("old offer better");
-      await draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('4'), ethers.utils.parseEther("3"), baseCurrency.address, overrides);
+      await draggable.connect(sig1).makeAcquisitionOffer(ethers.utils.formatBytes32String('4'), ethers.utils.parseEther("1.13"), baseCurrency.address, overrides);
       
       // new offer from sig1
       const offerAfter = await draggable.offer();
