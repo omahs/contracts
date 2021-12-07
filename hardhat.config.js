@@ -36,7 +36,7 @@ module.exports = {
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: accounts("mainnet"),
-      gasPrice: 120 * 1000000000,
+      gasPrice: 90 * 1000000000,
       chainId: 1,
     },
     localhost: {
@@ -146,7 +146,9 @@ module.exports = {
     },
     multiSigDefaultOwner: {
       default: 1,
-      1: process.env.MULTISIG_DEFAULT
+      1: "0xbFE09bd590cCb62EE3EE49940520E597602D8Cce", //nico 
+      3: "0xbFE09bd590cCb62EE3EE49940520E597602D8Cce",
+      42: "0xbFE09bd590cCb62EE3EE49940520E597602D8Cce"
     }
   },
   gasReporter: {
