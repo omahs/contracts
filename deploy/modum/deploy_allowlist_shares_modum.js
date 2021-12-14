@@ -3,8 +3,8 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
 
   const { deployer, multiSigDefaultOwner } = await getNamedAccounts();
 
-  const multisig = await ethers.getContractAt("MultiSig", "0x8934da8c9feb0f801dba179cf57bc029651866a9");
-  const multisigAddress = multisig.address;
+  
+  const multisigAddress = "0x8934da8c9feb0f801dba179cf57bc029651866a9";
 
   const recoveryHub = await deployments.get("RecoveryHub");
 
@@ -15,9 +15,9 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
   console.log("owner: %s", multisigAddress)
 
   const symbol = "MOP";
-  const name = "Modum Holding AG Participation Certificates";
-  const terms = "https://www.modum.io/investor-relations";
-  const totalShares = 50000;
+  const name = "modum.io participation certificate";
+  const terms = "www.modum.io/investor-relations";
+  const totalShares = 2743000;
 
   const feeData = await ethers.provider.getFeeData();
 
