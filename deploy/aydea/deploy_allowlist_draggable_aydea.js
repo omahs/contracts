@@ -14,7 +14,7 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
   const sharesContract = await ethers.getContractAt("AllowlistShares", shares.address);
   const owner = await sharesContract.owner();
   
-  const terms = "wwww.terms.ch";
+  const terms = "https://aydea.ch";
   const quorumBps = 75000;
   const votePeriodSeconds = 5184000;
 

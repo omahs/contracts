@@ -10,7 +10,7 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
   const symbol = "AYS";
   const name = "Aydea Shares";
   const terms = "https://aydea.ch";
-  const totalShares = 35000;
+  const totalShares = 350;
 
   if (network.name != "hardhat") {
     console.log("-----------------------")
