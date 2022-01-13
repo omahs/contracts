@@ -504,11 +504,22 @@ describe("New Standard", () => {
       const defaultAddress = sig3.address
       expect(await allowlistShares.canReceiveFromAnyone(defaultAddress)).to.equal(false);
       expect(await allowlistShares.isForbidden(defaultAddress)).to.equal(false);
-
+      
       await allowlistShares.mint(defaultAddress, "1000");
       const balancedef = await allowlistShares.balanceOf(defaultAddress);
       expect(balancedef).to.equal(ethers.BigNumber.from(1000));
       expect(await allowlistShares.canReceiveFromAnyone(defaultAddress)).to.equal(true);      
+    });
+
+    it("Should allow transfer to allowllisted", async () => {
+      const balanceBefore = await allowlistShares.balanceOf(sig3.address);
+      await allowlistShares.connect(sig1).transfer(sig3.address, "10");
+      const balanceAfter = await allowlistShares.balanceOf(sig3.address);
+      expect(balanceBefore.add(10)).to.equal(balanceAfter);
+    });
+
+    it("Should revert transfer to forbidden", async () => {
+      await expect(allowlistShares.connect(sig1).transfer(sig2.address, "10")).to.be.revertedWith("not allowed");
     });
   });
 
@@ -568,6 +579,17 @@ describe("New Standard", () => {
       await allowlistShares.approve(allowlistDraggable.address, config.infiniteAllowance);
       await allowlistDraggable.wrap(defaultAddress, "10");
       expect(await allowlistDraggable.canReceiveFromAnyone(defaultAddress)).to.equal(true);     
+    });
+
+    it("Should allow transfer to allowllisted", async () => {
+      const balanceBefore = await allowlistDraggable.balanceOf(sig3.address);
+      await allowlistDraggable.connect(sig1).transfer(sig3.address, "10");
+      const balanceAfter = await allowlistDraggable.balanceOf(sig3.address);
+      expect(balanceBefore.add(10)).to.equal(balanceAfter);
+    });
+
+    it("Should revert transfer to forbidden", async () => {
+      await expect(allowlistDraggable.connect(sig1).transfer(sig2.address, "10")).to.be.revertedWith("not allowed");
     });
   });
 
