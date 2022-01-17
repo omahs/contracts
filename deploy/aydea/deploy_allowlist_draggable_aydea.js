@@ -6,7 +6,9 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
   const { deployer } = await getNamedAccounts();
 
   const shares = await deployments.get('AllowlistSharesAydea');
-  const recoveryHub = await deployments.get("RecoveryHub");
+  const recoveryHub = await ethers.getContractAt("RecoveryHub", "0x6884ade31AC154DC52395F9dB819A03c667063A9");//mainnet
+  //const recoveryHub = await ethers.getContractAt("RecoveryHub", "0x9b886c04CE3CFB74E644DE92d65CfB873636e1fb"); //kovan
+  //const recoveryHub = await deployments.get("RecoveryHub");
   const offerFactory = await deployments.get("OfferFactory");
 
   // owner of allowlistshares and allowlist draggableshares is the same.
@@ -24,6 +26,9 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
     console.log("-----------------------")
     console.log("deployer: %s", deployer);
     console.log("owner: %s", owner)  // don't forget to set it in hardhat.config.js as the multsig account
+    console.log("recoveryhub at: %s", recoveryHub.address);
+    console.log("offer factory at: %s", offerFactory.address);
+    console.log("shares at: %s", shares.address);
     
     const prompt = await new Confirm("Addresses correct?").run();
     if(!prompt) {
@@ -54,4 +59,4 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
 };
 
 module.exports.tags = ["AllowlistDraggableSharesAydea"];
-module.exports.dependencies = ["RecoveryHub", "OfferFactory", "AllowlistSharesAydea"];
+module.exports.dependencies = ["OfferFactory", "AllowlistSharesAydea"];
