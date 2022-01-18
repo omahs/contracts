@@ -22,7 +22,7 @@ module.exports = async function ({ ethers, deployments, getNamedAccounts }) {
 
   if (network.name != "hardhat") {
     console.log("-----------------------")
-    console.log("Deploy Allowlist DraggableShares")
+    console.log("Deploy Allowlist DraggableShares Aydea")
     console.log("-----------------------")
     console.log("deployer: %s", deployer);
     console.log("owner: %s", owner)  // don't forget to set it in hardhat.config.js as the multsig account
